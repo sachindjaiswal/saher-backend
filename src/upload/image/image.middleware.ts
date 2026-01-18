@@ -14,12 +14,14 @@ const supportedFileMimeType = new Set([
 const fileFilter: multer.Options["fileFilter"] = (req: Request, file, cb) => {
   // To Check The File Type Is Image
   if (!file.mimetype.startsWith("image/")) {
-    cb(new Error("Only Image Is Allowed"))
+    req.fileValidationError = "Only Image Is Allowed"
+    return cb(null, false)
   }
 
   // To Check The Give Image Type Is Supported
   if (!supportedFileMimeType.has(file.mimetype)) {
-    cb(new Error("Image Format Not Supported"))
+    req.fileValidationError = "Image Format Not Supported"
+    return cb(null,false)
   }
 
   // If All The Check Is Done
