@@ -5,6 +5,8 @@ import uploadRouter from "./upload/upload.routes.js";
 import path from "node:path";
 import connectDb from "./database/connection.js";
 import authRouter from "./auth/auth.routes.js";
+// import attendenceRouter from "./attendence/attendence.controller.js"
+import attendenceRouter from "./attendence/attendence.js"
 
 // Env Config
 dotenv.config()
@@ -23,6 +25,10 @@ await connectDb()
 // Routes
 app.use("/api/upload", uploadRouter)
 app.use("/api/auth",authRouter)
+
+
+//Mark attendence
+app.use("/attendence",attendenceRouter)
 
 app.get("/", (req, res) => {
   res.status(200).json("This Is Saher Internal Home Page")
